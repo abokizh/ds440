@@ -568,11 +568,78 @@
                                         </div>
                                         <form action="/predict" method="post">
                                             <div class="input-group">
-                                                <input name="type" type="text" class="form-control bg-light border-0 small" placeholder="Type"
+                                                <!-- <input name="type" type="text" class="form-control bg-light border-0 small" placeholder="Type"
+                                                    aria-label="Search" aria-describedby="basic-addon2"> -->
+
+                                                <select name="type" type="text" class="form-control bg-light border-0 small"
                                                     aria-label="Search" aria-describedby="basic-addon2">
-                                                <input name="borough" type="text" class="form-control bg-light border-0 small" placeholder="Borough"
+                                                        <option value="INJURY">Injury</option>
+                                                        <option value="SICK">Sickness</option>
+                                                        <option value="PEDSTR">Pedestrian Incident</option>
+                                                        <option value="CARD">Cardiac Issue</option>
+                                                        <option value="DRUG">Drug-Related Incident</option>
+                                                        <option value="MVAINJ">Motor Vehicle Accident with Injury</option>
+                                                        <option value="ASTHMB">Asthma/Breathing Difficulty</option>
+                                                        <option value="OTHER">Other</option>
+                                                        <option value="INJMAJ">Major Injury</option>
+                                                        <option value="UNKNOW">Unknown</option>
+                                                        <option value="UNC">Unconscious</option>
+                                                        <option value="STAB">Stabbing Incident</option>
+                                                        <option value="MCI21">Mass Casualty Incident 21</option>
+                                                        <option value="PD13C">Pediatric Case Code 13C</option>
+                                                        <option value="EDPM">Emergency Department Pediatric Major</option>
+                                                        <option value="CARDBR">Cardiac Arrest with Breathing</option>
+                                                        <option value="DIFFBR">Difficulty Breathing</option>
+                                                        <option value="OBLAB">Obstetrics - Labor</option>
+                                                        <option value="SICMIN">Minor Sickness</option>
+                                                        <option value="EDP">Emergency Department Pediatric</option>
+                                                        <option value="INBLED">Internal Bleeding</option>
+                                                        <option value="COLD">Cold Exposure</option>
+                                                        <option value="RESPIR">Respiratory Issue</option>
+                                                        <option value="ELECT">Electrocution</option>
+                                                        <option value="EDPC">Emergency Department Pediatric Critical</option>
+                                                        <option value="ABDPN">Abdominal Pain</option>
+                                                        <option value="STATEP">State Emergency Protocol</option>
+                                                        <option value="SICPED">Sick Pediatric</option>
+                                                        <option value="BURNMA">Major Burn</option>
+                                                        <option value="OBMAJ">Obstetrics Major</option>
+                                                        <option value="SHOT">Shooting Incident</option>
+                                                        <option value="ALTMEN">Altered Mental Status</option>
+                                                        <option value="BURNMI">Minor Burn</option>
+                                                        <option value="TRAUMA">Trauma</option>
+                                                        <option value="CVAC">Cerebrovascular Accident</option>
+                                                        <option value="MEDRXN">Medical Reaction</option>
+                                                        <option value="ANAPH">Anaphylaxis</option>
+                                                        <option value="ARREST">Cardiac Arrest</option>
+                                                        <option value="STNDBY">Standby</option>
+                                                        <option value="T-TEXT">Text Communication</option>
+                                                        <option value="T-UNC">Text Unknown</option>
+                                                        <option value="OBCOMP">Obstetrics Complication</option>
+                                                        <option value="CVA">Stroke (Cerebrovascular Accident)</option>
+                                                        <option value="PD13">Pediatric Code 13</option>
+                                                        <option value="CHOKE">Choking</option>
+                                                        <option value="INJMIN">Minor Injury</option>
+                                                        <option value="SEIZR">Seizure</option>
+                                                        <option value="AMPMAJ">Amputation Major</option>
+                                                        <option value="DIFFFC">Difficulty Feeding/Breathing in Child</option>
+                                                        <option value="CDBRFC">Cardiac/Breathing Critical</option>
+                                                        <option value="MVA">Motor Vehicle Accident</option>
+                                                        <option value="INHALE">Inhalation Incident</option>
+                                                </select>
+
+                                                <!-- <input name="borough" type="text" class="form-control bg-light border-0 small" placeholder="Borough"
+                                                    aria-label="Search" aria-describedby="basic-addon2"> -->
+
+                                                <select name="borough" type="text" class="form-control bg-light border-0 small" placeholder="Borough"
                                                     aria-label="Search" aria-describedby="basic-addon2">
-                                                <input name="zip" type="text" class="form-control bg-light border-0 small" placeholder="ZIP Code"
+                                                    <option value="QUEENS">Queens</option>
+                                                    <option value="MANHATTAN">Manhattan</option>
+                                                    <option value="BROOKLYN">Brooklyn</option>
+                                                    <option value="BRONX">Bronx</option>
+                                                    <option value="RICHMOND / STATEN ISLAND">Richmond / Staten Island</option>
+                                                </select>
+
+                                                <input required pattern="^\d{5}$" required title="Zip code must be exactly 5 digits." name="zip" type="int" min="" max class="form-control bg-light border-0 small" placeholder="ZIP Code"
                                                     aria-label="Search" aria-describedby="basic-addon2">
                                             </div>
 
