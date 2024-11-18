@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>EMS Optimzation</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ url_for('static', filename='vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -368,161 +368,153 @@
 
                     <!-- Content Row -->
 
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <!-- Area Chart -->
-                            <div class="col-lg-12">
-                                <div class="card shadow mb-4">
-                                    <!-- Card Header - Dropdown -->
-                                    <div
-                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Weather</h6>
-                                        <div class="dropdown no-arrow">
-                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                                aria-labelledby="dropdownMenuLink">
-                                                <div class="dropdown-header">Dropdown Header:</div>
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Something else here</a>
+                    <form action="/predict" method="post">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <!-- Area Chart -->
+                                <!-- <div class="col-lg-12">
+                                    <div class="card shadow mb-4">
+                                        <div
+                                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                            <h6 class="m-0 font-weight-bold text-primary">Weather</h6>
+                                            <div class="dropdown no-arrow">
+                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                    aria-labelledby="dropdownMenuLink">
+                                                    <div class="dropdown-header">Dropdown Header:</div>
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="chart-area">
+                                                <canvas id="myAreaChart"></canvas>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Card Body -->
-                                    <div class="card-body">
-                                        <div class="chart-area">
-                                            <canvas id="myAreaChart"></canvas>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
-                            
-                            <div class="col-lg-12">
-                                <div class="card border-left-info shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Traffic
-                                                </div>
-                                                <div class="row no-gutters align-items-center">
-                                                    <div class="col-auto">
-                                                        <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                
+                                <div class="col-lg-12">
+                                    <div class="card border-left-info shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Traffic
                                                     </div>
-                                                    <div class="col">
-                                                        <div class="progress progress-sm mr-2">
-                                                            <div class="progress-bar bg-info" role="progressbar"
-                                                                style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                                aria-valuemax="100"></div>
+                                                    <div class="row no-gutters align-items-center">
+                                                        <div class="col-auto">
+                                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="progress progress-sm mr-2">
+                                                                <div class="progress-bar bg-info" role="progressbar"
+                                                                    style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                                    aria-valuemax="100"></div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Pie Chart -->
-                            <!-- <div class="col-lg-12">
-                                <div class="card shadow mb-4">
-                                    <div
-                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Traffic</h6>
-                                        <div class="dropdown no-arrow">
-                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                                aria-labelledby="dropdownMenuLink">
-                                                <div class="dropdown-header">Dropdown Header:</div>
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="chart-pie pt-4 pb-2">
-                                            <canvas id="myPieChart"></canvas>
+                                </div> -->
+                                <!-- Pie Chart -->
+                                <!-- <div class="col-lg-12">
+                                    <div class="card shadow mb-4">
+                                        <div
+                                            class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                            <h6 class="m-0 font-weight-bold text-primary">Traffic</h6>
+                                            <div class="dropdown no-arrow">
+                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                    aria-labelledby="dropdownMenuLink">
+                                                    <div class="dropdown-header">Dropdown Header:</div>
+                                                    <a class="dropdown-item" href="#">Action</a>
+                                                    <a class="dropdown-item" href="#">Another action</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a class="dropdown-item" href="#">Something else here</a>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="mt-4 text-center small">
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-primary"></i> Direct
-                                            </span>
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-success"></i> Social
-                                            </span>
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-info"></i> Referral
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <br>
-                            <div class="col-lg-12">
-                                <div class="card shadow mb-4">
-                                    <div class="card-header py-3">
-                                        <h6 class="m-0 font-weight-bold text-primary">Filters</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <h4 class="small font-weight-bold">Snow <span
-                                                class="float-right">20%</span></h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
-                                                aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <h4 class="small font-weight-bold">Rain <span
-                                                class="float-right">40%</span></h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-                                                aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <h4 class="small font-weight-bold">Ice <span
-                                                class="float-right">60%</span></h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar" role="progressbar" style="width: 60%"
-                                                aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <h4 class="small font-weight-bold">Blizzard <span
-                                                class="float-right">80%</span></h4>
-                                        <div class="progress mb-4">
-                                            <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                                                aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                        <h4 class="small font-weight-bold">Storm <span
-                                                class="float-right">Complete!</span></h4>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-                                                aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="card-body">
+                                            <div class="chart-pie pt-4 pb-2">
+                                                <canvas id="myPieChart"></canvas>
+                                            </div>
+                                            <div class="mt-4 text-center small">
+                                                <span class="mr-2">
+                                                    <i class="fas fa-circle text-primary"></i> Direct
+                                                </span>
+                                                <span class="mr-2">
+                                                    <i class="fas fa-circle text-success"></i> Social
+                                                </span>
+                                                <span class="mr-2">
+                                                    <i class="fas fa-circle text-info"></i> Referral
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">EMS Map</h6>
-                                </div>
-                                <div class="card-body">
-                                    <img src="{{ url_for('static', filename='img/map.png') }}" width="100%" alt="">
-                                </div>
-                            </div>
+                                </div> -->
+                                <div class="col-lg-12">
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Filters</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <h4 class="small font-weight-bold">Temperature <span
+                                                id="temperature-block" class="float-right">{{ temperature if temperature else 50 }}%</span></h4>
+                                            <input 
+                                                name="temperature"
+                                                type="range" 
+                                                id="slider" 
+                                                class="slider" 
+                                                min="0" 
+                                                max="100" 
+                                                step="1" 
+                                                value="{{ temperature if temperature else 50 }}"
+                                                style="width:100%;"
+                                                oninput="updateValue(this.value, 'temperature-block')">
 
-                            {% if result %}
-                            <div class="row">
-        
+                                            <h4 class="small font-weight-bold">Traffic <span
+                                                id="traffic-block" class="float-right">{{ traffic_severity if traffic_severity else 50 }}%</span></h4>
+                                            <input 
+                                                name="traffic_severity"
+                                                type="range" 
+                                                id="slider" 
+                                                class="slider" 
+                                                min="0" 
+                                                max="100" 
+                                                step="1" 
+                                                value="{{ traffic_severity if traffic_severity else 50 }}"
+                                                style="width:100%;"
+                                                oninput="updateValue(this.value, 'traffic-block')">
+
+                                            <h4 class="small font-weight-bold">Weather Condition</h4>
+                                            <select name="weather_condition" type="text" class="mx-2 form-control bg-light border-0 small" placeholder="Borough"
+                                                aria-label="Search" aria-describedby="basic-addon2">
+                                                <option value="Rainy" {% if weather_condition == "Rainy" %}selected{% endif %}>Rainy</option>
+                                                <option value="Cloudy" {% if weather_condition == "Cloudy" %}selected{% endif %}>Cloudy</option>
+                                                <option value="Snow" {% if weather_condition == "Snow" %}selected{% endif %}>Snow</option>
+                                                <option value="Foggy" {% if weather_condition == "Foggy" %}selected{% endif %}>Foggy</option>
+                                                <option value="Windy" {% if weather_condition == "Windy" %}selected{% endif %}>Windy</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if result %}
                                 <!-- Earnings (Annual) Card Example -->
-                                <div class="col-xl-4 col-md-6 mb-4">
+                                <div class="col-md-12 mb-4">
                                     <div class="card border-left-success shadow h-100 py-2">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
@@ -541,7 +533,7 @@
     
         
                                 <!-- Pending Requests Card Example -->
-                                <div class="col-xl-4 col-md-6 mb-4">
+                                <div class="col-md-12 mb-4">
                                     <div class="card border-left-warning shadow h-100 py-2">
                                         <div class="card-body">
                                             <div class="row no-gutters align-items-center">
@@ -557,100 +549,108 @@
                                         </div>
                                     </div>
                                 </div>
+                                {% endif %}
                             </div>
-                            {% endif %}
+                            <div class="col-lg-8">
+                                <div class="col-lg-12">
 
-                            <div class="col-lg-12">
-
-                                <div class="card border-left-info shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Call EMS
-                                        </div>
-                                        <form action="/predict" method="post">
-                                            <div class="input-group">
-                                                <!-- <input name="type" type="text" class="form-control bg-light border-0 small" placeholder="Type"
-                                                    aria-label="Search" aria-describedby="basic-addon2"> -->
-
-                                                <select name="type" type="text" class="form-control bg-light border-0 small"
-                                                    aria-label="Search" aria-describedby="basic-addon2">
-                                                        <option value="INJURY">Injury</option>
-                                                        <option value="SICK">Sickness</option>
-                                                        <option value="PEDSTR">Pedestrian Incident</option>
-                                                        <option value="CARD">Cardiac Issue</option>
-                                                        <option value="DRUG">Drug-Related Incident</option>
-                                                        <option value="MVAINJ">Motor Vehicle Accident with Injury</option>
-                                                        <option value="ASTHMB">Asthma/Breathing Difficulty</option>
-                                                        <option value="OTHER">Other</option>
-                                                        <option value="INJMAJ">Major Injury</option>
-                                                        <option value="UNKNOW">Unknown</option>
-                                                        <option value="UNC">Unconscious</option>
-                                                        <option value="STAB">Stabbing Incident</option>
-                                                        <option value="MCI21">Mass Casualty Incident 21</option>
-                                                        <option value="PD13C">Pediatric Case Code 13C</option>
-                                                        <option value="EDPM">Emergency Department Pediatric Major</option>
-                                                        <option value="CARDBR">Cardiac Arrest with Breathing</option>
-                                                        <option value="DIFFBR">Difficulty Breathing</option>
-                                                        <option value="OBLAB">Obstetrics - Labor</option>
-                                                        <option value="SICMIN">Minor Sickness</option>
-                                                        <option value="EDP">Emergency Department Pediatric</option>
-                                                        <option value="INBLED">Internal Bleeding</option>
-                                                        <option value="COLD">Cold Exposure</option>
-                                                        <option value="RESPIR">Respiratory Issue</option>
-                                                        <option value="ELECT">Electrocution</option>
-                                                        <option value="EDPC">Emergency Department Pediatric Critical</option>
-                                                        <option value="ABDPN">Abdominal Pain</option>
-                                                        <option value="STATEP">State Emergency Protocol</option>
-                                                        <option value="SICPED">Sick Pediatric</option>
-                                                        <option value="BURNMA">Major Burn</option>
-                                                        <option value="OBMAJ">Obstetrics Major</option>
-                                                        <option value="SHOT">Shooting Incident</option>
-                                                        <option value="ALTMEN">Altered Mental Status</option>
-                                                        <option value="BURNMI">Minor Burn</option>
-                                                        <option value="TRAUMA">Trauma</option>
-                                                        <option value="CVAC">Cerebrovascular Accident</option>
-                                                        <option value="MEDRXN">Medical Reaction</option>
-                                                        <option value="ANAPH">Anaphylaxis</option>
-                                                        <option value="ARREST">Cardiac Arrest</option>
-                                                        <option value="STNDBY">Standby</option>
-                                                        <option value="T-TEXT">Text Communication</option>
-                                                        <option value="T-UNC">Text Unknown</option>
-                                                        <option value="OBCOMP">Obstetrics Complication</option>
-                                                        <option value="CVA">Stroke (Cerebrovascular Accident)</option>
-                                                        <option value="PD13">Pediatric Code 13</option>
-                                                        <option value="CHOKE">Choking</option>
-                                                        <option value="INJMIN">Minor Injury</option>
-                                                        <option value="SEIZR">Seizure</option>
-                                                        <option value="AMPMAJ">Amputation Major</option>
-                                                        <option value="DIFFFC">Difficulty Feeding/Breathing in Child</option>
-                                                        <option value="CDBRFC">Cardiac/Breathing Critical</option>
-                                                        <option value="MVA">Motor Vehicle Accident</option>
-                                                        <option value="INHALE">Inhalation Incident</option>
-                                                </select>
-
-                                                <!-- <input name="borough" type="text" class="form-control bg-light border-0 small" placeholder="Borough"
-                                                    aria-label="Search" aria-describedby="basic-addon2"> -->
-
-                                                <select name="borough" type="text" class="form-control bg-light border-0 small" placeholder="Borough"
-                                                    aria-label="Search" aria-describedby="basic-addon2">
-                                                    <option value="QUEENS">Queens</option>
-                                                    <option value="MANHATTAN">Manhattan</option>
-                                                    <option value="BROOKLYN">Brooklyn</option>
-                                                    <option value="BRONX">Bronx</option>
-                                                    <option value="RICHMOND / STATEN ISLAND">Richmond / Staten Island</option>
-                                                </select>
-
-                                                <input required pattern="^\d{5}$" required title="Zip code must be exactly 5 digits." name="zip" type="int" min="" max class="form-control bg-light border-0 small" placeholder="ZIP Code"
-                                                    aria-label="Search" aria-describedby="basic-addon2">
+                                    <div class="card border-left-info shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Call EMS
                                             </div>
+                                                <div class="input-group">
+                                                    <!-- <input name="type" type="text" class="form-control bg-light border-0 small" placeholder="Type"
+                                                        aria-label="Search" aria-describedby="basic-addon2"> -->
 
-                                            <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-phone-volume"></i> Call</button>
-                                        </form>
+                                                    <select name="type" type="text" class="mx-2 form-control bg-light border-0 small"
+                                                        aria-label="Search" aria-describedby="basic-addon2">
+                                                            <option value="INJURY" {% if type == "INJURY" %}selected{% endif %}>Injury</option>
+                                                            <option value="SICK" {% if type == "SICK" %}selected{% endif %}>Sickness</option>
+                                                            <option value="PEDSTR" {% if type == "PEDSTR" %}selected{% endif %}>Pedestrian Incident</option>
+                                                            <option value="CARD" {% if type == "CARD" %}selected{% endif %}>Cardiac Issue</option>
+                                                            <option value="DRUG" {% if type == "DRUG" %}selected{% endif %}>Drug-Related Incident</option>
+                                                            <option value="MVAINJ" {% if type == "MVAINJ" %}selected{% endif %}>Motor Vehicle Accident with Injury</option>
+                                                            <option value="ASTHMB" {% if type == "ASTHMB" %}selected{% endif %}>Asthma/Breathing Difficulty</option>
+                                                            <option value="OTHER" {% if type == "OTHER" %}selected{% endif %}>Other</option>
+                                                            <option value="INJMAJ" {% if type == "INJMAJ" %}selected{% endif %}>Major Injury</option>
+                                                            <option value="UNKNOW" {% if type == "UNKNOW" %}selected{% endif %}>Unknown</option>
+                                                            <option value="UNC" {% if type == "UNC" %}selected{% endif %}>Unconscious</option>
+                                                            <option value="STAB" {% if type == "STAB" %}selected{% endif %}>Stabbing Incident</option>
+                                                            <option value="MCI21" {% if type == "MCI21" %}selected{% endif %}>Mass Casualty Incident 21</option>
+                                                            <option value="PD13C" {% if type == "PD13C" %}selected{% endif %}>Pediatric Case Code 13C</option>
+                                                            <option value="EDPM" {% if type == "EDPM" %}selected{% endif %}>Emergency Department Pediatric Major</option>
+                                                            <option value="CARDBR" {% if type == "CARDBR" %}selected{% endif %}>Cardiac Arrest with Breathing</option>
+                                                            <option value="DIFFBR" {% if type == "DIFFBR" %}selected{% endif %}>Difficulty Breathing</option>
+                                                            <option value="OBLAB" {% if type == "OBLAB" %}selected{% endif %}>Obstetrics - Labor</option>
+                                                            <option value="SICMIN" {% if type == "SICMIN" %}selected{% endif %}>Minor Sickness</option>
+                                                            <option value="EDP" {% if type == "EDP" %}selected{% endif %}>Emergency Department Pediatric</option>
+                                                            <option value="INBLED" {% if type == "INBLED" %}selected{% endif %}>Internal Bleeding</option>
+                                                            <option value="COLD" {% if type == "COLD" %}selected{% endif %}>Cold Exposure</option>
+                                                            <option value="RESPIR" {% if type == "RESPIR" %}selected{% endif %}>Respiratory Issue</option>
+                                                            <option value="ELECT" {% if type == "ELECT" %}selected{% endif %}>Electrocution</option>
+                                                            <option value="EDPC" {% if type == "EDPC" %}selected{% endif %}>Emergency Department Pediatric Critical</option>
+                                                            <option value="ABDPN" {% if type == "ABDPN" %}selected{% endif %}>Abdominal Pain</option>
+                                                            <option value="STATEP" {% if type == "STATEP" %}selected{% endif %}>State Emergency Protocol</option>
+                                                            <option value="SICPED" {% if type == "SICPED" %}selected{% endif %}>Sick Pediatric</option>
+                                                            <option value="BURNMA" {% if type == "BURNMA" %}selected{% endif %}>Major Burn</option>
+                                                            <option value="OBMAJ" {% if type == "OBMAJ" %}selected{% endif %}>Obstetrics Major</option>
+                                                            <option value="SHOT" {% if type == "SHOT" %}selected{% endif %}>Shooting Incident</option>
+                                                            <option value="ALTMEN" {% if type == "ALTMEN" %}selected{% endif %}>Altered Mental Status</option>
+                                                            <option value="BURNMI" {% if type == "BURNMI" %}selected{% endif %}>Minor Burn</option>
+                                                            <option value="TRAUMA" {% if type == "TRAUMA" %}selected{% endif %}>Trauma</option>
+                                                            <option value="CVAC" {% if type == "CVAC" %}selected{% endif %}>Cerebrovascular Accident</option>
+                                                            <option value="MEDRXN" {% if type == "MEDRXN" %}selected{% endif %}>Medical Reaction</option>
+                                                            <option value="ANAPH" {% if type == "ANAPH" %}selected{% endif %}>Anaphylaxis</option>
+                                                            <option value="ARREST" {% if type == "ARREST" %}selected{% endif %}>Cardiac Arrest</option>
+                                                            <option value="STNDBY" {% if type == "STNDBY" %}selected{% endif %}>Standby</option>
+                                                            <option value="T-TEXT" {% if type == "T-TEXT" %}selected{% endif %}>Text Communication</option>
+                                                            <option value="T-UNC" {% if type == "T-UNC" %}selected{% endif %}>Text Unknown</option>
+                                                            <option value="OBCOMP" {% if type == "OBCOMP" %}selected{% endif %}>Obstetrics Complication</option>
+                                                            <option value="CVA" {% if type == "CVA" %}selected{% endif %}>Stroke (Cerebrovascular Accident)</option>
+                                                            <option value="PD13" {% if type == "PD13" %}selected{% endif %}>Pediatric Code 13</option>
+                                                            <option value="CHOKE" {% if type == "CHOKE" %}selected{% endif %}>Choking</option>
+                                                            <option value="INJMIN" {% if type == "INJMIN" %}selected{% endif %}>Minor Injury</option>
+                                                            <option value="SEIZR" {% if type == "SEIZR" %}selected{% endif %}>Seizure</option>
+                                                            <option value="AMPMAJ" {% if type == "AMPMAJ" %}selected{% endif %}>Amputation Major</option>
+                                                            <option value="DIFFFC" {% if type == "DIFFFC" %}selected{% endif %}>Difficulty Feeding/Breathing in Child</option>
+                                                            <option value="CDBRFC" {% if type == "CDBRFC" %}selected{% endif %}>Cardiac/Breathing Critical</option>
+                                                            <option value="MVA" {% if type == "MVA" %}selected{% endif %}>Motor Vehicle Accident</option>
+                                                            <option value="INHALE" {% if type == "INHALE" %}selected{% endif %}>Inhalation Incident</option>
+                                                    </select>
+
+                                                    <!-- <input name="borough" type="text" class="form-control bg-light border-0 small" placeholder="Borough"
+                                                        aria-label="Search" aria-describedby="basic-addon2"> -->
+
+                                                    <select name="borough" type="text" class="mx-2 form-control bg-light border-0 small" placeholder="Borough"
+                                                        aria-label="Search" aria-describedby="basic-addon2">
+                                                        <option value="QUEENS" {% if borough == "QUEENS" %}selected{% endif %}>Queens</option>
+                                                        <option value="MANHATTAN" {% if borough == "MANHATTAN" %}selected{% endif %}>Manhattan</option>
+                                                        <option value="BROOKLYN" {% if borough == "BROOKLYN" %}selected{% endif %}>Brooklyn</option>
+                                                        <option value="BRONX" {% if borough == "BRONX" %}selected{% endif %}>Bronx</option>
+                                                        <option value="RICHMOND / STATEN ISLAND" {% if type == "RICHMOND / STATEN ISLAND" %}selected{% endif %}>Richmond / Staten Island</option>
+                                                    </select>
+
+                                                    <input required pattern="^\d{5}$" required title="Zip code must be exactly 5 digits." name="zip" type="int" min="" max class="form-control bg-light border-0 small" placeholder="ZIP Code"
+                                                        aria-label="Search" aria-describedby="basic-addon2" class="mx-2" 
+                                                        value="{{ zip if zip else null }}">
+                                                </div>
+                                                <br>
+                                                <button type="submit" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-phone-volume"></i> Call</button>
+                                        </div>
                                     </div>
                                 </div>
-
+                                <br>
+                                <div class="card shadow mb-4">
+                                    <div class="card-header py-3">
+                                        <h6 class="m-0 font-weight-bold text-primary">EMS Map</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <img src="{{ url_for('static', filename='img/map.png') }}" width="100%" alt="">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
                 <!-- /.container-fluid -->
 
@@ -714,7 +714,14 @@
     <!-- Page level custom scripts -->
     <script src="{{ url_for('static', filename='js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ url_for('static', filename='js/demo/chart-pie-demo.js') }}"></script>
-
+    <script>
+        function updateValue(slider, element) {
+          const value = slider;
+          const thumbColor = `rgb(${255 - value * 2.55}, ${value * 2.55}, 100)`;
+          document.getElementById(element).innerText = `${value}%`;
+          slider.style.setProperty('--thumb-color', thumbColor);
+        }
+      </script>
 </body>
 
 </html>

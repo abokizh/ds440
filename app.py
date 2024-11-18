@@ -20,6 +20,10 @@ def predict():
     type = form.get('type').upper()
     borough = form.get('borough')
     zip = form.get('zip')
+    temperature = form.get('temperature')
+    traffic_severity_raw = form.get('traffic_severity')
+    traffic_severity = int(traffic_severity_raw)/33.333
+    weather_condition = form.get('weather_condition')
 
     # ERRORS
 
@@ -53,7 +57,7 @@ def predict():
 
     # MODEL
 
-    result = model.predict(type, borough, zip)
+    result = model.predict(type, borough, zip, temperature, weather_condition, traffic_severity)
     minutes = int(result[0])
     seconds = int((result[0] - minutes) * 60)
 
@@ -66,7 +70,15 @@ def predict():
         "error": [minutes_error, seconds_error],
     }
 
-    return render_template('index.html', result=prediction)
+    return render_template(
+        'index.html',
+        result=prediction,
+        type = type,
+        borough = borough,
+        zip = zip,
+        temperature = temperature,
+        traffic_severity = traffic_severity_raw,
+        weather_condition = weather_condition)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

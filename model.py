@@ -7,12 +7,15 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import mean_squared_error
 from sklearn.impute import SimpleImputer
+from xgboost import XGBRegressor
 
 class Model:
     
     def __init__(self):
+        
+        # Already did Hyperparameter Tuning
         # Loading Data
-        self.file_path = 'newCSVWith_Weather_Trafficfeatures.csv'
+        self.file_path = '40kexpandedEMSData_withFakeData.csv'
         self.data = pd.read_csv(self.file_path)
 
         # Target variable is ETA Prediction in minutes
@@ -26,8 +29,8 @@ class Model:
         self.categorical_cols = ['initial_call_type', 'final_call_type', 'borough', 'weather_condition', 'day_of_week', 'time_of_day']
 
         # Numerical columns (already in numeric form)
-        self.numerical_cols = ['initial_severity_level_code', 'final_severity_level_code', 'incident_hour', 'is_weekend', 'temperature', 
-                        'traffic_severity', 'is_peak_hour',  'borough_density', 'is_holiday', 'distance_estimate']
+        self.numerical_cols = ['initial_severity_level_code', 'final_severity_level_code', 'incident_hour', 'is_weekend', 
+                        'temperature', 'traffic_severity', 'is_peak_hour', 'borough_density', 'is_holiday', 'distance_estimate']
 
         # Preprocessing Pipeline with Imputation
         self.preprocessor = ColumnTransformer(
@@ -37,26 +40,33 @@ class Model:
                 ('cat', Pipeline(steps=[('imputer', SimpleImputer(strategy='most_frequent')), 
                                         ('onehot', OneHotEncoder(handle_unknown='ignore'))]), self.categorical_cols)
             ])
+
         
     def train(self):
-        # Best parameters from previous GridSearchCV for RandomForestRegressor
-        self.rf = RandomForestRegressor(
+
+        # Hardcoded Best XGBoost Parameters
+        self.xgb = XGBRegressor(
+            random_state=42,
+            colsample_bytree=1.0,
+            gamma=0.3,
+            learning_rate=0.01,
+            max_depth=10,
+            min_child_weight=10,
             n_estimators=200,
-            max_depth=None,
-            min_samples_split=2,
-            min_samples_leaf=2,
-            max_features='sqrt',
-            random_state=42
+            subsample=1.0,
+            reg_alpha=0.1,  # L1 regularization
+            reg_lambda=1.0  # L2 regularization
         )
 
-        # Model pipeline (preprocessing + Random Forest Regressor)
+
+        # Model pipeline (preprocessing + XGBoost Regressor)
         self.pipeline = Pipeline(steps=[('preprocessor', self.preprocessor),
-                                ('regressor', self.rf)])
+                                ('regressor', self.xgb)])
 
         # Train/test split (80/20)
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.2, random_state=42)
 
-        # Fit the model with hardcoded parameters
+        # Fit the model
         self.pipeline.fit(self.X_train, self.y_train)
 
         # Make predictions
@@ -67,7 +77,7 @@ class Model:
         self.train_mse = mean_squared_error(self.y_train, self.y_pred_train)
         self.test_mse = mean_squared_error(self.y_test, self.y_pred_test)
 
-    def predict(self, type, borough, zip):
+    def predict(self, type, borough, zip, temperature, weather_condition, traffic_severity):
         user_input = {
             'initial_call_type': [type],
             'initial_severity_level_code': [5],
@@ -94,11 +104,11 @@ class Model:
             'day_of_week': ['Sunday'],
             'is_weekend': [1],
             'severity_change': [0],
-            'weather_condition': ['Rainy'],
-            'temperature': [35],
+            'weather_condition': [weather_condition],
+            'temperature': [temperature],
             'is_peak_hour': [0],
             'incident_duration_minutes': [48.6],
-            'traffic_severity': [1.89],
+            'traffic_severity': [traffic_severity],
 
             'borough_density': [21000],
             'is_holiday': [1],
