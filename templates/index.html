@@ -20,6 +20,9 @@
     <!-- Custom styles for this template-->
     <link href="{{ url_for('static', filename='css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD92uWhbuWAMfFoMwlHQuPvtrEDsAqB5J0&callback=initMap" async defer></script>
+
 </head>
 
 <body id="page-top">
@@ -473,7 +476,7 @@
                                         </div>
                                         <div class="card-body">
                                             <h4 class="small font-weight-bold">Temperature <span
-                                                id="temperature-block" class="float-right">{{ temperature if temperature else 50 }}%</span></h4>
+                                                id="temperature-block" class="float-right">{{ temperature if temperature else 50 }}°F</span></h4>
                                             <input 
                                                 name="temperature"
                                                 type="range" 
@@ -484,10 +487,21 @@
                                                 step="1" 
                                                 value="{{ temperature if temperature else 50 }}"
                                                 style="width:100%;"
-                                                oninput="updateValue(this.value, 'temperature-block')">
+                                                oninput="updateValue(this.value, 'temperature-block', '°F')">
 
                                             <h4 class="small font-weight-bold">Traffic <span
-                                                id="traffic-block" class="float-right">{{ traffic_severity if traffic_severity else 50 }}%</span></h4>
+                                                id="traffic-block" class="float-right">
+                                                {% if not traffic_severity|int %}
+                                                    Medium
+                                                {% elif 0 < traffic_severity|int < 33 %}
+                                                    Low
+                                                {% elif 33 <= traffic_severity|int < 66 %}
+                                                    Medium
+                                                {% else %}
+                                                   High
+                                                {% endif %}
+
+                                            </span></h4>
                                             <input 
                                                 name="traffic_severity"
                                                 type="range" 
@@ -644,8 +658,16 @@
                                     <div class="card-header py-3">
                                         <h6 class="m-0 font-weight-bold text-primary">EMS Map</h6>
                                     </div>
-                                    <div class="card-body">
-                                        <img src="{{ url_for('static', filename='img/map.png') }}" width="100%" alt="">
+                                    <div class="card-body" id="map" style="height: 600px;">
+                                        <iframe
+                                            width="100%"
+                                            height="500"
+                                            style="border:0"
+                                            loading="lazy"
+                                            allowfullscreen
+                                            referrerpolicy="no-referrer-when-downgrade"
+                                            src="https://www.google.com/maps/embed/v1/search?key=AIzaSyAlRPLImVgraG3WXeRUKsSjJrze1i3KAas&q=hospitals+in+New+York">
+                                        </iframe>
                                     </div>
                                 </div>
                             </div>
@@ -715,10 +737,23 @@
     <script src="{{ url_for('static', filename='js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ url_for('static', filename='js/demo/chart-pie-demo.js') }}"></script>
     <script>
-        function updateValue(slider, element) {
+        function updateValue(slider, element, postfix = '') {
           const value = slider;
           const thumbColor = `rgb(${255 - value * 2.55}, ${value * 2.55}, 100)`;
-          document.getElementById(element).innerText = `${value}%`;
+          if(element == "traffic-block"){
+            if (value > 0 && value < 33){
+                document.getElementById(element).innerText = `Low`;
+            }
+            else if (value >= 33 && value < 66){
+                document.getElementById(element).innerText = `Medium`;
+            }
+            else{
+                document.getElementById(element).innerText = `High`;
+            }
+          }
+          else{
+            document.getElementById(element).innerText = `${value}${postfix}`;
+          }
           slider.style.setProperty('--thumb-color', thumbColor);
         }
       </script>
